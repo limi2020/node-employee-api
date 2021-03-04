@@ -5,5 +5,9 @@
         "database": "node_employee",
         "user": "root",
         "password": "root"
+    },
+    "jwt_config": {
+        "secretKey": "secret key",
+        "expiresIn": 86400
     }
 }
