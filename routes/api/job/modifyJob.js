@@ -1,10 +1,10 @@
-const dbQuery = require('../../utils/dbConnect')
+const dbQuery = require('../../../utils/dbConnect')
 
 module.exports = async (req, res) => {
-    const { dep_id, dep_name, dep_desc } = req.body
+    const { job_id, job_code, job_name } = req.body
     const update_time = new Date()
-    const params = [dep_name, dep_desc, update_time, dep_id]
-    const sql = `update department set dep_name = ?, dep_desc = ?, update_time = ? where dep_id = ?`
+    const params = [ job_code, job_name, update_time, job_id]
+    const sql = `update job set job_code = ?, job_name = ?, update_time = ? where job_id = ?` 
     const result = await dbQuery(sql, params)
     if (result) {
         res.json({

@@ -1,5 +1,4 @@
-const e = require('express')
-const dbQuery = require('../../utils/dbConnect')
+const dbQuery = require('../../../utils/dbConnect')
 
 module.exports = async (req, res) => {
     const sql = `select * from department`

@@ -1,4 +1,4 @@
-const dbQuery = require('../../utils/dbConnect')
+const dbQuery = require('../../../utils/dbConnect')
 
 module.exports = async (req, res) => {
     const {role_id, role_code, role_name} = req.body
