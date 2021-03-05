@@ -5,7 +5,8 @@ const query = require('../utils/dbConnect')
 
 users.get('/getUser', async (req, res) => {
 	const sql = "select * from user"
-	const result = await query(sql)
+	const params = []
+	const result = await query(sql, params)
 	if (result) {
 		res.json({
 			code: 400,
@@ -24,9 +25,9 @@ users.post('/editUser', async (req, res) => {
 		id,
 		username
 	} = req.body
-	console.log(id);
-	const sql = `update user set username ='${username}' where id=${id}`
-	const result = await query(sql)
+	const params = [username, id]
+	const sql = `update user set username =? where id=?`
+	const result = await query(sql, params)
 	if (result) {
 		res.json({
 			code: 200,
@@ -50,8 +51,9 @@ users.post('/addUser', async (req, res) => {
     if(username && password){
 		const salt =await bcrypt.genSalt(10)
 		password1 = await bcrypt.hash(password, salt)
-		const sql = `insert into user(username, password) values('${username}', '${password1}');`
-		const result = await query(sql);
+		const params = [username,password1]
+		const sql = `insert into user(username, password) values(?,?);`
+		const result = await query(sql, params);
 		if(result){
 			res.json({
 				code: 200,
@@ -69,8 +71,9 @@ users.post('/addUser', async (req, res) => {
 })
 users.post('/deleteUser', async (req, res) => {
 	const {id} = req.body
-	const sql = `delete from user where id=${id}`
-	const result = query(sql)
+	const params = [id]
+	const sql = `delete from user where id=?`
+	const result = query(sql, params)
 	if (result) {
 		res.json({
 			code: 200,

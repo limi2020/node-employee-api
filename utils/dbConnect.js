@@ -9,7 +9,7 @@ const pool = mysql.createPool({
     password: config.password
 })
 
-function dbQuery(sql) {
+function dbQuery(sql, params) {
     console.log(sql);
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connect) => {
@@ -17,7 +17,7 @@ function dbQuery(sql) {
                 reject(err)
                 return
             }
-            connect.query(sql, (error, result) => {
+            connect.query(sql,params, (error, result) => {
                 if (error) {
                     reject(error)
                 } else {
