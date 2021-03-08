@@ -26,12 +26,14 @@ const user = require('./routes/user')
 const roles = require('./routes/roles')
 const department = require('./routes/department')
 const job = require('./routes/job')
+const salary = require('./routes/salary')
 
 app.use('/test', test)
 app.use('/api/user', user)
 app.use('/api/roles', roles)
 app.use('/api/department', department)
 app.use('/api/job', job)
+app.use('/api/salary', salary)
 
 app.listen(3000, () => {
     console.log('启动服务器成功');
