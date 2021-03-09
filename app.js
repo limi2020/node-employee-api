@@ -22,18 +22,21 @@ app.use((req, res, next) => {
 
 // 引入测试接口路由模块
 const test = require('./routes/test')
+const login = require('./routes/login')
 const user = require('./routes/user')
 const roles = require('./routes/roles')
 const department = require('./routes/department')
 const job = require('./routes/job')
 const salary = require('./routes/salary')
+const decodeToken = require('./midleware/decodeToken')
 
 app.use('/test', test)
-app.use('/api/user', user)
-app.use('/api/roles', roles)
-app.use('/api/department', department)
-app.use('/api/job', job)
-app.use('/api/salary', salary)
+app.use('/api', login)
+app.use('/api/user', decodeToken, user)
+app.use('/api/roles', decodeToken, roles)
+app.use('/api/department', decodeToken, department)
+app.use('/api/job', decodeToken, job)
+app.use('/api/salary', decodeToken, salary)
 
 app.listen(3000, () => {
     console.log('启动服务器成功');
