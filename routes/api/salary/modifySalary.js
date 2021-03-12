@@ -1,9 +1,11 @@
 const dbQuery = require('../../../utils/dbConnect')
+const dateFormat = require('../../../utils/dataformat')
 
 module.exports = async (req, res) => {
     const { salary_id, salary_num, month, type, account } = req.body
     const update_time = new Date()
-    const params = [salary_num, month, type, account, update_time, salary_id]
+    const formatTime = dateFormat(update_time)
+    const params = [salary_num, month, type, account, formatTime, salary_id]
     const sql = `update salary set salary_num = ?, month = ?, type = ?, account = ?, update_time = ? where salary_id = ?`
     const result = await dbQuery(sql, params)
     if (result) {

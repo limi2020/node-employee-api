@@ -5,12 +5,13 @@ const config = require('config').get('jwt_config')
 module.exports = async (req, res) => {
     const { username, password } = req.body
     const params = [ username ]
-    const sql = `select username,password,role_code from user join role on user.role_id = role.role_id where username=?`
+    const sql = `select id,username,password,role_code from user join role on user.role_id = role.role_id where username=?`
     const result = await dbQuery(sql, params)
     if (result) {
         const isValid = await bcrypt.compare(password, result[0].password)
         if (isValid) {
             const tokenContent = {
+                id: result[0].id,
                 username: result[0].username,
                 password: result[0].password,
                 role_code: result[0].role_code

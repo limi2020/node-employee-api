@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
         res.json({
             code: 200,
             message: '查询用户列表成功',
-            page,
+            page: page,
             data: result
         })
     } else {

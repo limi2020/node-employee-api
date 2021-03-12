@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
                 })
             } else {
                 req.userInfo = decoded
+                console.log(req.userInfo)
                 next()
             }
         })

@@ -1,9 +1,11 @@
 const dbQuery = require('../../../utils/dbConnect')
+const dateFormat = require('../../../utils/dataformat')
 
 module.exports = async (req, res) => {
     const {job_id, job_code, job_name} = req.body
     const create_time = new Date()
-    const params = [job_id, job_code, job_name, create_time]
+    const formatTime = dateFormat(create_time)
+    const params = [job_id, job_code, job_name, formatTime]
     const sql = `insert into job(job_id, job_code, job_name, create_time) value(?,?,?,?)`
     const result = await dbQuery(sql, params)
     if (result) {
